@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JTextField;
@@ -11,28 +13,32 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu.Separator;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JMenu;
 import javax.swing.JButton;
 
 public class Exercicio51 {
+
+	static JPanel menu;
 	static JPanel painel;
 	static JPanel painel2;
+	static JPanel painel3;
 	static JButton botao;
 	static JButton botao2;
 	static JFrame janela;
 	static JFrame janela2;
+	static JFrame janela3;
+	static JFrame janela4;
 	static JLabel capa;
-	static JPanel menu;
 	static JTextField Campo;
 	static JMenuBar menu2;
-	static JMenuItem ajuda;
-
-	public static void main(String[] args) {
-		CriarComponentes();
-
-	}
+	static JMenu iniciar, ajuda, sobre;
+	static JButton botaodemenu1;
+	static JMenuItem cadastro_cliente, sair;
 
 	static void CriarComponentes() {
 		janela = new JFrame("Cadastro de Usuário.");
@@ -70,6 +76,22 @@ public class Exercicio51 {
 		botoes();
 	}
 
+	static void BotaoBarra() {
+		botaodemenu1 = new JButton("Cadastro de Clientes");
+		botaodemenu1.setSize(1500, 20);
+		botaodemenu1.setLocation(1, 100);
+		botaodemenu1.setBackground(Color.black);
+		botaodemenu1.setVisible(true);
+		menu2.add(botaodemenu1);
+		BotaoBarra();// mudar chamada
+
+	}
+
+	public static void main(String[] args) {
+		CriarComponentes();
+
+	}
+
 	static void botoes() {
 		botao2.addActionListener(new ActionListener() {
 
@@ -100,7 +122,6 @@ public class Exercicio51 {
 		janela2.setResizable(false);
 		janela2.setVisible(true);
 		janela2.setLocationRelativeTo(null);
-		// janela2.setMaximizedBounds(0, 0, );
 
 		painel2 = new JPanel();
 		painel2.setSize(800, 600);
@@ -116,9 +137,72 @@ public class Exercicio51 {
 		menu2.setVisible(true);
 		painel2.add(menu2);
 
-		ajuda = new JMenuItem();
-		ajuda.setLocation(100, 1);
-		ajuda.setVisible(true);
+		iniciar = new JMenu("Iniciar");
+		ajuda = new JMenu("Ajuda");
+		sobre = new JMenu("Sobre");
+		menu2.add(iniciar);
+		menu2.add(ajuda);
+		menu2.add(sobre);
+
+		cadastro_cliente = new JMenuItem("Cadastro de Cliente");
+		sair = new JMenuItem("Sair");
+
+		iniciar.add(cadastro_cliente);
+		iniciar.addSeparator();
+		iniciar.add(sair);
+
+		cadastro_cliente.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				Tela_Cadastro();
+
+			}
+		});
+
+		sair.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
+
+		sobre.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				sobre.setToolTipText("Informações sobre o desenvolvimento.");
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, "Versão do Sistema 1.1 \nDesenvolvido por Prado Devolepment");
+				sobre.setVisible(true);
+
+			}
+		});
 
 		janela2.addWindowListener(new WindowListener() {
 
@@ -144,6 +228,7 @@ public class Exercicio51 {
 			public void windowDeactivated(WindowEvent e) {
 				// TODO Auto-generated method stub
 
+				sobre.setVisible(true);
 			}
 
 			@Override
@@ -156,7 +241,7 @@ public class Exercicio51 {
 
 			@Override
 			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
+				System.exit(0);
 
 			}
 
@@ -165,7 +250,17 @@ public class Exercicio51 {
 				// TODO Auto-generated method stub
 
 			}
+
 		});
+
+	}
+
+	static void Tela_Cadastro() {
+
+		janela3 = new JFrame("Cadastro de Cliente");
+		janela3.setSize(400, 200);
+		janela3.setLocationRelativeTo(null);
+		janela3.setVisible(true);
 
 	}
 
