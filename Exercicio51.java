@@ -13,7 +13,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu.Separator;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -32,13 +31,21 @@ public class Exercicio51 {
 	static JFrame janela;
 	static JFrame janela2;
 	static JFrame janela3;
-	static JFrame janela4;
-	static JLabel capa;
-	static JTextField Campo;
+	static JLabel capa, capa2, capa3, capa4, capa5, capa6;
+	static JTextField campo1, campo2, campo3, campo4, campo5;
 	static JMenuBar menu2;
 	static JMenu iniciar, ajuda, sobre;
 	static JButton botaodemenu1;
 	static JMenuItem cadastro_cliente, sair;
+	static JButton novo;
+	static JButton editar;
+	static JButton salvar;
+	static JButton consultar;
+
+	static int i = 0;
+	static int j = 0;
+	static int cod = 1;
+	static String[][] cadastro = new String[100][5];
 
 	static void CriarComponentes() {
 		janela = new JFrame("Cadastro de Usuário.");
@@ -76,14 +83,14 @@ public class Exercicio51 {
 		botoes();
 	}
 
-	static void BotaoBarra() {
+	static void botaoBarra() {
 		botaodemenu1 = new JButton("Cadastro de Clientes");
 		botaodemenu1.setSize(1500, 20);
 		botaodemenu1.setLocation(1, 100);
 		botaodemenu1.setBackground(Color.black);
 		botaodemenu1.setVisible(true);
 		menu2.add(botaodemenu1);
-		BotaoBarra();// mudar chamada
+		botaoBarra();// mudar chamada
 
 	}
 
@@ -107,14 +114,14 @@ public class Exercicio51 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				janela.setVisible(false);
-				CriarMenu();
+				criarMenu();
 
 			}
 		});
 
 	}
 
-	static void CriarMenu() {
+	static void criarMenu() {
 
 		janela2 = new JFrame();
 		janela2.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -156,7 +163,7 @@ public class Exercicio51 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Tela_Cadastro();
+				telaCadastro();
 
 			}
 		});
@@ -165,7 +172,6 @@ public class Exercicio51 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.exit(0);
 			}
 		});
@@ -174,25 +180,21 @@ public class Exercicio51 {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 				sobre.setToolTipText("Informações sobre o desenvolvimento.");
 			}
 
@@ -208,32 +210,28 @@ public class Exercicio51 {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 				sobre.setVisible(true);
 			}
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO Auto-generated method stub
+
 				CriarComponentes();
 				janela2.dispose();
 				janela.setVisible(true);
@@ -247,7 +245,6 @@ public class Exercicio51 {
 
 			@Override
 			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -255,13 +252,192 @@ public class Exercicio51 {
 
 	}
 
-	static void Tela_Cadastro() {
+	static void telaCadastro() {
 
 		janela3 = new JFrame("Cadastro de Cliente");
-		janela3.setSize(400, 200);
+		janela3.setLayout(null);
+		janela3.setSize(800, 600);
 		janela3.setLocationRelativeTo(null);
 		janela3.setVisible(true);
 
+		painel3 = new JPanel();
+		painel3.setSize(800, 400);
+		painel3.setLocation(0, 50);
+		painel3.setLayout(null);
+		painel3.setBackground(Color.LIGHT_GRAY);
+		janela3.setResizable(false);
+		painel3.setVisible(true);
+		janela3.add(painel3);
+
+		capa2 = new JLabel("Cliente:");
+		capa2.setHorizontalAlignment(SwingConstants.CENTER);
+		capa2.setBounds(-250, 50, 600, 50);
+		capa2.setVisible(true);
+		painel3.add(capa2);
+
+		campo1 = new JTextField();
+		campo1.setSize(490, 30);
+		campo1.setLocation(90, 60);
+		campo1.setVisible(true);
+		painel3.add(campo1);
+
+		capa5 = new JLabel("Código:");
+		capa5.setHorizontalAlignment(SwingConstants.CENTER);
+		capa5.setBounds(340, 15, 600, 50);
+		capa5.setVisible(true);
+		painel3.add(capa5);
+
+		campo4 = new JTextField();
+		campo4.setSize(30, 30);
+		campo4.setLocation(670, 25);
+		campo4.setText("" + cod);
+		campo4.setVisible(true);
+		painel3.add(campo4);
+
+		capa3 = new JLabel("Endereço:");
+		capa3.setHorizontalAlignment(SwingConstants.CENTER);
+		capa3.setBounds(-243, 90, 600, 50);
+		capa3.setVisible(true);
+		painel3.add(capa3);
+
+		campo2 = new JTextField();
+		campo2.setSize(490, 30);
+		campo2.setLocation(90, 100);
+		campo2.setVisible(true);
+		painel3.add(campo2);
+
+		capa4 = new JLabel("E-mail:");
+		capa4.setHorizontalAlignment(SwingConstants.CENTER);
+		capa4.setBounds(-251, 130, 600, 50);
+		capa4.setVisible(true);
+		painel3.add(capa4);
+
+		campo3 = new JTextField();
+		campo3.setSize(490, 30);
+		campo3.setLocation(90, 140);
+		campo3.setVisible(true);
+		painel3.add(campo3);
+
+		capa6 = new JLabel("Telefone:");
+		capa6.setHorizontalAlignment(SwingConstants.CENTER);
+		capa6.setBounds(-245, 170, 600, 50);
+		capa6.setVisible(true);
+		painel3.add(capa6);
+
+		campo5 = new JTextField();
+		campo5.setSize(100, 30);
+		campo5.setLocation(90, 180);
+		campo5.setVisible(true);
+		painel3.add(campo5);
+
+		novo = new JButton("Novo");
+		novo.setSize(80, 30);
+		novo.setLocation(50, 345);
+		novo.setVisible(true);
+		painel3.add(novo);
+
+		editar = new JButton("Editar");
+		editar.setSize(80, 30);
+		editar.setLocation(180, 345);
+		editar.setVisible(true);
+		editar.setEnabled(false);
+		painel3.add(editar);
+
+		salvar = new JButton("Salvar");
+		salvar.setSize(80, 30);
+		salvar.setLocation(430, 345);
+		salvar.setVisible(true);
+		painel3.add(salvar);
+
+		consultar = new JButton("Consultar");
+		consultar.setSize(120, 30);
+		consultar.setLocation(280, 345);
+		consultar.setVisible(true);
+		painel3.add(consultar);
+
+		novo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cod <= 2) {
+					salvarRegistro();
+					campo4.setText("");
+					campo4.setText("" + cod);
+					
+					cod++;
+
+					salvar.setEnabled(true);
+					editar.setEnabled(false);	
+					telaCadastro();
+					
+				} else {
+					
+					
+					campo1.setEnabled(false);
+					campo2.setEnabled(false);
+					campo3.setEnabled(false);
+					campo4.setEnabled(false);
+					campo5.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "Limite de clientes atingido!");
+
+				}
+
+				
+				
+				campo1.setText("");
+				campo2.setText("");
+				campo3.setText("");
+				campo5.setText("");
+
+			}
+
+		});
+
+		salvar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				salvar.setEnabled(false);
+				editar.setEnabled(true);
+				salvar.setEnabled(true);
+				
+				
+				campo1.setEnabled(false);
+				campo2.setEnabled(false);
+				campo3.setEnabled(false);
+				campo4.setEnabled(false);
+				campo5.setEnabled(false);
+				
+				
+				JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
+
+			}
+		});
+		
+		editar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				campo1.setEnabled(true);
+				campo2.setEnabled(true);
+				campo3.setEnabled(true);
+				campo4.setEnabled(true);
+				campo5.setEnabled(true);
+				
+			}
+		});
 	}
 
+	static void salvarRegistro() {
+		j = 0;
+		cadastro[i][j] = campo1.getText();
+		cadastro[i][j + 1] = campo4.getText();
+		cadastro[i][j + 2] = campo2.getText();
+		cadastro[i][j + 3] = campo3.getText();
+		cadastro[i][j + 4] = campo5.getText();
+		i++;
+
+	}
 }
