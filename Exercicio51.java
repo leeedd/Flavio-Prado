@@ -367,7 +367,8 @@ public class Exercicio51 {
 					cod++;
 
 					salvar.setEnabled(true);
-					editar.setEnabled(false);	
+					editar.setEnabled(false);
+					janela3.dispose();
 					telaCadastro();
 					
 				} else {
