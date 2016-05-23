@@ -359,7 +359,7 @@ public class Exercicio51 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (cod <= 2) {
+				if (cod <= 100) {
 					salvarRegistro();
 					campo4.setText("");
 					campo4.setText("" + cod);
