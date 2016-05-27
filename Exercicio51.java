@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.table.*;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -41,7 +43,9 @@ public class Exercicio51 {
 	static JButton editar;
 	static JButton salvar;
 	static JButton consultar;
-
+	static JButton excluir;
+	static JTable tabela;
+	
 	static int i = 0;
 	static int j = 0;
 	static int cod = 1;
@@ -332,7 +336,7 @@ public class Exercicio51 {
 
 		novo = new JButton("Novo");
 		novo.setSize(80, 30);
-		novo.setLocation(50, 345);
+		novo.setLocation(82, 345);
 		novo.setVisible(true);
 		painel3.add(novo);
 
@@ -345,15 +349,21 @@ public class Exercicio51 {
 
 		salvar = new JButton("Salvar");
 		salvar.setSize(80, 30);
-		salvar.setLocation(430, 345);
+		salvar.setLocation(550, 345);
 		salvar.setVisible(true);
 		painel3.add(salvar);
 
 		consultar = new JButton("Consultar");
 		consultar.setSize(120, 30);
-		consultar.setLocation(280, 345);
+		consultar.setLocation(278, 345);
 		consultar.setVisible(true);
 		painel3.add(consultar);
+		
+		excluir = new JButton("Excluir");
+		excluir.setSize(120, 30);
+		excluir.setLocation(415, 345);
+		excluir.setVisible(true);
+		painel3.add(excluir);
 
 		novo.addActionListener(new ActionListener() {
 
@@ -367,7 +377,7 @@ public class Exercicio51 {
 					cod++;
 
 					salvar.setEnabled(true);
-					editar.setEnabled(false);
+					editar.setEnabled(false);	
 					janela3.dispose();
 					telaCadastro();
 					
@@ -415,6 +425,40 @@ public class Exercicio51 {
 
 			}
 		});
+		
+		
+		excluir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			
+				if(excluir.isEnabled()){
+					if(JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_NO_OPTION){
+						janela3.dispose();
+						telaCadastro();
+						
+						
+						JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+					};
+					
+					
+				}
+		
+			}
+		});
+		
+		consultar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				tabela = new JTable(rowData, columnNamesV);
+				
+			}
+		});
+		
+		
 		
 		editar.addActionListener(new ActionListener() {
 			
