@@ -41,11 +41,14 @@ public class Exercicio51 {
 	static JLabel capa4;
 	static JLabel capa5;
 	static JLabel capa6;
+	static JLabel capa7;
 	static JTextField campo1;
 	static JTextField campo2;
 	static JTextField campo3;
 	static JTextField campo4;
 	static JTextField campo5;
+	static JTextField campo6;
+	static JTextField campo7;
 	static JMenuBar menu2;
 	static JMenu iniciar;
 	static JMenu ajuda;
@@ -71,49 +74,67 @@ public class Exercicio51 {
 
 	static void componentes() {
 		janela = new JFrame("Cadastro de Usuário.");
-		capa = new JLabel("Seja bem vindo ao cadastro de clientes, para cadastrar seus clientes clique em Iniciar!");
+		capa = new JLabel("Login:");
 		capa.setHorizontalAlignment(SwingConstants.CENTER);
-		capa.setBounds(120, 150, 600, 50);
+		capa.setBounds(240, 100, 150, 20);
 		capa.setVisible(true);
-
+		
+		capa7 = new JLabel("Senha:");
+		capa7.setHorizontalAlignment(SwingConstants.CENTER);
+		capa7.setBounds(240, 100, 152, 75);
+		capa7.setVisible(true);
+	
 		painel = new JPanel();
-		painel.setSize(800, 600);
+		painel.setSize(550, 300);
 		painel.setLayout(null);
 		painel.setBackground(Color.LIGHT_GRAY);
 		painel.setVisible(true);
 		painel.add(capa);
+		painel.add(capa7);
+		
+		campo6 = new JTextField();
+		campo6.setSize(80, 20);
+		campo6.setLocation(350, 95);
+		campo6.setVisible(true);
+		painel.add(campo6);
+		
+		campo7 = new JTextField();
+		campo7.setSize(80, 20);
+		campo7.setLocation(350, 125);
+		campo7.setVisible(true);
+		painel.add(campo7);
+		
 		janela.add(painel);
-
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setSize(800, 600);
+		janela.setSize(550, 300);
 		janela.setLocationRelativeTo(null);
 		janela.setResizable(false);
 		janela.setVisible(true);
 		painel.add(capa);
-
-		botao = new JButton("Iniciar");
-		botao.setSize(100, 50);
-		botao.setLocation(300, 400);
+		
+		botao = new JButton("Login");
+		botao.setSize(80, 20);
+		botao.setLocation(380, 150);
 		botao.setVisible(true);
 		painel.add(botao);
 
 		botao2 = new JButton("Sair");
-		botao2.setSize(100, 50);
-		botao2.setLocation(401, 400);
+		botao2.setSize(80, 20);
+		botao2.setLocation(300, 150);
 		botao2.setVisible(true);
 		painel.add(botao2);
 		botoes();
-	}
-
-	static void botaoBarra() {
-		botaodemenu1 = new JButton("Cadastro de Clientes");
-		botaodemenu1.setSize(1500, 20);
-		botaodemenu1.setLocation(1, 100);
-		botaodemenu1.setBackground(Color.black);
-		botaodemenu1.setVisible(true);
-		menu2.add(botaodemenu1);
-		botaoBarra();// mudar chamada
-
+		
+		if(campo6.equals("admin")&& campo7.equals("admin")){
+			
+			criarMenu();
+			JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+			
+		}else{
+			JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto, por favor verifique!");
+		}
+		
+		
 	}
 
 	public static void main(String[] args) {
