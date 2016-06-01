@@ -28,30 +28,48 @@ public class Exercicio51 {
 	static JPanel painel;
 	static JPanel painel2;
 	static JPanel painel3;
+	static JPanel painel4;
 	static JButton botao;
 	static JButton botao2;
 	static JFrame janela;
 	static JFrame janela2;
 	static JFrame janela3;
-	static JLabel capa, capa2, capa3, capa4, capa5, capa6;
-	static JTextField campo1, campo2, campo3, campo4, campo5;
+	static JFrame janela4;
+	static JLabel capa;
+	static JLabel capa2;
+	static JLabel capa3;
+	static JLabel capa4;
+	static JLabel capa5;
+	static JLabel capa6;
+	static JTextField campo1;
+	static JTextField campo2;
+	static JTextField campo3;
+	static JTextField campo4;
+	static JTextField campo5;
 	static JMenuBar menu2;
-	static JMenu iniciar, ajuda, sobre;
+	static JMenu iniciar;
+	static JMenu ajuda;
+	static JMenu sobre;
 	static JButton botaodemenu1;
-	static JMenuItem cadastro_cliente, sair;
+	static JMenuItem cadastroCliente;
+	static JMenuItem sair;
 	static JButton novo;
 	static JButton editar;
 	static JButton salvar;
 	static JButton consultar;
 	static JButton excluir;
 	static JTable tabela;
-	
+
 	static int i = 0;
 	static int j = 0;
 	static int cod = 1;
 	static String[][] cadastro = new String[100][5];
 
-	static void CriarComponentes() {
+	static String[] tabela1 = new String[] { "Código", "Nome", "Endereço", "E-mail", "Telefone" };
+
+	static DefaultTableModel tabela2;
+
+	static void componentes() {
 		janela = new JFrame("Cadastro de Usuário.");
 		capa = new JLabel("Seja bem vindo ao cadastro de clientes, para cadastrar seus clientes clique em Iniciar!");
 		capa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,7 +117,7 @@ public class Exercicio51 {
 	}
 
 	public static void main(String[] args) {
-		CriarComponentes();
+		componentes();
 
 	}
 
@@ -155,14 +173,14 @@ public class Exercicio51 {
 		menu2.add(ajuda);
 		menu2.add(sobre);
 
-		cadastro_cliente = new JMenuItem("Cadastro de Cliente");
+		cadastroCliente = new JMenuItem("Cadastro de Cliente");
 		sair = new JMenuItem("Sair");
 
-		iniciar.add(cadastro_cliente);
+		iniciar.add(cadastroCliente);
 		iniciar.addSeparator();
 		iniciar.add(sair);
 
-		cadastro_cliente.addActionListener(new ActionListener() {
+		cadastroCliente.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -236,7 +254,7 @@ public class Exercicio51 {
 			@Override
 			public void windowClosing(WindowEvent e) {
 
-				CriarComponentes();
+				componentes();
 				janela2.dispose();
 				janela.setVisible(true);
 			}
@@ -297,7 +315,6 @@ public class Exercicio51 {
 		campo4.setText("" + cod);
 		campo4.setVisible(true);
 		painel3.add(campo4);
-
 		capa3 = new JLabel("Endereço:");
 		capa3.setHorizontalAlignment(SwingConstants.CENTER);
 		capa3.setBounds(-243, 90, 600, 50);
@@ -358,7 +375,7 @@ public class Exercicio51 {
 		consultar.setLocation(278, 345);
 		consultar.setVisible(true);
 		painel3.add(consultar);
-		
+
 		excluir = new JButton("Excluir");
 		excluir.setSize(120, 30);
 		excluir.setLocation(415, 345);
@@ -373,17 +390,16 @@ public class Exercicio51 {
 					salvarRegistro();
 					campo4.setText("");
 					campo4.setText("" + cod);
-					
+
 					cod++;
 
 					salvar.setEnabled(true);
-					editar.setEnabled(false);	
+					editar.setEnabled(false);
 					janela3.dispose();
 					telaCadastro();
-					
+
 				} else {
-					
-					
+
 					campo1.setEnabled(false);
 					campo2.setEnabled(false);
 					campo3.setEnabled(false);
@@ -393,8 +409,6 @@ public class Exercicio51 {
 
 				}
 
-				
-				
 				campo1.setText("");
 				campo2.setText("");
 				campo3.setText("");
@@ -412,73 +426,114 @@ public class Exercicio51 {
 				salvar.setEnabled(false);
 				editar.setEnabled(true);
 				salvar.setEnabled(true);
-				
-				
+
 				campo1.setEnabled(false);
 				campo2.setEnabled(false);
 				campo3.setEnabled(false);
 				campo4.setEnabled(false);
 				campo5.setEnabled(false);
+
+				salvarRegistro();
 				
 				
 				JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
 
 			}
 		});
-		
-		
+
 		excluir.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			
-				if(excluir.isEnabled()){
-					if(JOptionPane.showConfirmDialog(null,"Tem certeza que deseja excluir?", null, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_NO_OPTION){
+
+				if (excluir.isEnabled()) {
+					if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?", null,
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_NO_OPTION) {
 						janela3.dispose();
 						telaCadastro();
-						
-						
+
 						JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
-					};
-					
-					
+					}
+					;
+
 				}
-		
+
 			}
 		});
-		
+
 		consultar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
+				janela4 = new JFrame("Consulta de Clientes");
+				janela4.setLayout(null);
+				janela4.setSize(600, 400);
+				janela4.setLocationRelativeTo(null);
+				janela4.setVisible(true);
+
+				painel4 = new JPanel();
+				painel4.setSize(800, 600);
+				painel4.setLocation(0, 0);
+				painel4.setLayout(null);
+				painel4.setBackground(Color.LIGHT_GRAY);
+				janela4.setResizable(false);
+				painel4.setVisible(true);
+				janela4.add(painel4);
+
+				tabela2 = new DefaultTableModel(tabela1, 0);
+				tabela2.addRow(tabela1);
+
+				tabela = new JTable();
+				tabela.setBounds(10, 10, 575, 300);
+				tabela.setLayout(null);
+				tabela.setModel(tabela2);
+				painel4.add(tabela);
+				painel4.setVisible(true);
+
+				exibirRegistros();
 				
-				
-				tabela = new JTable(rowData, columnNamesV);
 				
 			}
 		});
-		
-		
-		
+
 		editar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				campo1.setEnabled(true);
 				campo2.setEnabled(true);
 				campo3.setEnabled(true);
 				campo4.setEnabled(true);
 				campo5.setEnabled(true);
-				
+
 			}
 		});
 	}
 
+	static void exibirRegistros() {
+
+		String[] dados = new String[5];
+
+		for (int i = 0; i < cod; i++) {
+
+			for (int j = 0; j < 5; j++) {
+
+				dados[j] = cadastro[i][j];
+
+			}
+			tabela2.addRow(dados);
+
+		}
+
+
+	}
+
 	static void salvarRegistro() {
 		j = 0;
-		cadastro[i][j] = campo1.getText();
-		cadastro[i][j + 1] = campo4.getText();
+		cadastro[i][j] = campo4.getText();
+		cadastro[i][j + 1] = campo1.getText();
 		cadastro[i][j + 2] = campo2.getText();
 		cadastro[i][j + 3] = campo3.getText();
 		cadastro[i][j + 4] = campo5.getText();
