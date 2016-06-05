@@ -3,6 +3,8 @@ import java.awt.Component;
 import javax.swing.table.*;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.ScrollPane;
+import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -14,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
@@ -61,7 +64,10 @@ public class Exercicio51 {
 	static JButton salvar;
 	static JButton consultar;
 	static JButton excluir;
+	static JButton ok;
 	static JTable tabela;
+	static Scrollbar rolagem;
+	static JScrollPane rolagem2;
 
 	static int i = 0;
 	static int j = 0;
@@ -78,12 +84,12 @@ public class Exercicio51 {
 		capa.setHorizontalAlignment(SwingConstants.CENTER);
 		capa.setBounds(240, 100, 150, 20);
 		capa.setVisible(true);
-		
+
 		capa7 = new JLabel("Senha:");
 		capa7.setHorizontalAlignment(SwingConstants.CENTER);
 		capa7.setBounds(240, 100, 152, 75);
 		capa7.setVisible(true);
-	
+
 		painel = new JPanel();
 		painel.setSize(550, 300);
 		painel.setLayout(null);
@@ -91,19 +97,19 @@ public class Exercicio51 {
 		painel.setVisible(true);
 		painel.add(capa);
 		painel.add(capa7);
-		
+
 		campo6 = new JTextField();
 		campo6.setSize(80, 20);
 		campo6.setLocation(350, 95);
 		campo6.setVisible(true);
 		painel.add(campo6);
-		
+
 		campo7 = new JTextField();
 		campo7.setSize(80, 20);
 		campo7.setLocation(350, 125);
 		campo7.setVisible(true);
 		painel.add(campo7);
-		
+
 		janela.add(painel);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		janela.setSize(550, 300);
@@ -111,7 +117,7 @@ public class Exercicio51 {
 		janela.setResizable(false);
 		janela.setVisible(true);
 		painel.add(capa);
-		
+
 		botao = new JButton("Login");
 		botao.setSize(80, 20);
 		botao.setLocation(380, 150);
@@ -124,17 +130,7 @@ public class Exercicio51 {
 		botao2.setVisible(true);
 		painel.add(botao2);
 		botoes();
-		
-		if(campo6.equals("admin")&& campo7.equals("admin")){
-			
-			criarMenu();
-			JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-			
-		}else{
-			JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto, por favor verifique!");
-		}
-		
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -156,8 +152,20 @@ public class Exercicio51 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				janela.setVisible(false);
-				criarMenu();
+
+				String a = campo6.getText();
+				String b = campo7.getText();
+
+				if (a.equals("admin") && b.equals("admin")) {
+
+					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+
+					janela.setVisible(false);
+					criarMenu();
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto, por favor verifique!");
+				}
 
 			}
 		});
@@ -455,8 +463,7 @@ public class Exercicio51 {
 				campo5.setEnabled(false);
 
 				salvarRegistro();
-				
-				
+
 				JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
 
 			}
@@ -503,7 +510,6 @@ public class Exercicio51 {
 				janela4.add(painel4);
 
 				tabela2 = new DefaultTableModel(tabela1, 0);
-				tabela2.addRow(tabela1);
 
 				tabela = new JTable();
 				tabela.setBounds(10, 10, 575, 300);
@@ -512,9 +518,28 @@ public class Exercicio51 {
 				painel4.add(tabela);
 				painel4.setVisible(true);
 
+				rolagem2 = new JScrollPane(tabela);
+				rolagem2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+				rolagem2.setBounds(10, 10, 575, 300);
+				rolagem2.setViewportView(tabela);
+				painel4.add(rolagem2);
+
+				ok = new JButton("OK");
+				ok.setBounds(10, 310, 100, 20);
+				ok.setVisible(true);
+				painel4.add(ok);
+
 				exibirRegistros();
-				
-				
+
+			}
+		});
+
+		ok.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				telaCadastro();
 			}
 		});
 
@@ -547,7 +572,6 @@ public class Exercicio51 {
 			tabela2.addRow(dados);
 
 		}
-
 
 	}
 
