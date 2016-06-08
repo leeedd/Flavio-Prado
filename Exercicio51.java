@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.table.*;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.ScrollPane;
@@ -11,11 +13,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.ParseException;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -23,7 +28,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JMenu;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 
 public class Exercicio51 {
 
@@ -45,11 +52,11 @@ public class Exercicio51 {
 	static JLabel capa5;
 	static JLabel capa6;
 	static JLabel capa7;
+	static JLabel capa8;
 	static JTextField campo1;
 	static JTextField campo2;
 	static JTextField campo3;
 	static JTextField campo4;
-	static JTextField campo5;
 	static JTextField campo6;
 	static JTextField campo7;
 	static JMenuBar menu2;
@@ -68,10 +75,15 @@ public class Exercicio51 {
 	static JTable tabela;
 	static Scrollbar rolagem;
 	static JScrollPane rolagem2;
+	static MaskFormatter mascara;
+	static JFormattedTextField telefone;
 
 	static int i = 0;
 	static int j = 0;
-	static int cod = 1;
+	static int cod = 0;
+
+	static int posicao;
+
 	static String[][] cadastro = new String[100][5];
 
 	static String[] tabela1 = new String[] { "Código", "Nome", "Endereço", "E-mail", "Telefone" };
@@ -80,6 +92,7 @@ public class Exercicio51 {
 
 	static void componentes() {
 		janela = new JFrame("Cadastro de Usuário.");
+		capa8 = new JLabel(new ImageIcon("Imagem\\imagem2.png"));
 		capa = new JLabel("Login:");
 		capa.setHorizontalAlignment(SwingConstants.CENTER);
 		capa.setBounds(240, 100, 150, 20);
@@ -93,10 +106,15 @@ public class Exercicio51 {
 		painel = new JPanel();
 		painel.setSize(550, 300);
 		painel.setLayout(null);
-		painel.setBackground(Color.LIGHT_GRAY);
+		painel.setBackground(Color.WHITE);
 		painel.setVisible(true);
 		painel.add(capa);
 		painel.add(capa7);
+
+		capa8.setHorizontalAlignment(SwingConstants.CENTER);
+		capa8.setBounds(30, 20, 200, 200);
+		capa8.setVisible(true);
+		painel.add(capa8);
 
 		campo6 = new JTextField();
 		campo6.setSize(80, 20);
@@ -104,7 +122,7 @@ public class Exercicio51 {
 		campo6.setVisible(true);
 		painel.add(campo6);
 
-		campo7 = new JTextField();
+		campo7 = new JPasswordField();
 		campo7.setSize(80, 20);
 		campo7.setLocation(350, 125);
 		campo7.setVisible(true);
@@ -156,12 +174,12 @@ public class Exercicio51 {
 				String a = campo6.getText();
 				String b = campo7.getText();
 
-				if (a.equals("admin") && b.equals("admin")) {
-
-					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+				if (a.equalsIgnoreCase("admin") && b.equalsIgnoreCase("admin")) {
 
 					janela.setVisible(false);
 					criarMenu();
+
+					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuário ou senha incorreto, por favor verifique!");
@@ -309,6 +327,7 @@ public class Exercicio51 {
 		janela3.setLayout(null);
 		janela3.setSize(800, 600);
 		janela3.setLocationRelativeTo(null);
+		janela3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		janela3.setVisible(true);
 
 		painel3 = new JPanel();
@@ -374,11 +393,19 @@ public class Exercicio51 {
 		capa6.setVisible(true);
 		painel3.add(capa6);
 
-		campo5 = new JTextField();
-		campo5.setSize(100, 30);
-		campo5.setLocation(90, 180);
-		campo5.setVisible(true);
-		painel3.add(campo5);
+		try {
+			mascara = new MaskFormatter("(##)####-####");
+			mascara.setPlaceholderCharacter('_');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		telefone = new JFormattedTextField(mascara);
+		telefone.setColumns(10);
+		telefone.setSize(90, 20);
+		telefone.setLocation(90, 182);
+		telefone.setVisible(true);
+		painel3.add(telefone);
 
 		novo = new JButton("Novo");
 		novo.setSize(80, 30);
@@ -403,6 +430,8 @@ public class Exercicio51 {
 		consultar.setSize(120, 30);
 		consultar.setLocation(278, 345);
 		consultar.setVisible(true);
+		consultar.setEnabled(true);
+
 		painel3.add(consultar);
 
 		excluir = new JButton("Excluir");
@@ -433,15 +462,12 @@ public class Exercicio51 {
 					campo2.setEnabled(false);
 					campo3.setEnabled(false);
 					campo4.setEnabled(false);
-					campo5.setEnabled(false);
+					telefone.setEnabled(false);
 					JOptionPane.showMessageDialog(null, "Limite de clientes atingido!");
 
 				}
 
-				campo1.setText("");
-				campo2.setText("");
-				campo3.setText("");
-				campo5.setText("");
+				
 
 			}
 
@@ -460,7 +486,14 @@ public class Exercicio51 {
 				campo2.setEnabled(false);
 				campo3.setEnabled(false);
 				campo4.setEnabled(false);
-				campo5.setEnabled(false);
+				telefone.setEnabled(false);
+
+				if (cod == 1) {
+					consultar.setEnabled(false);
+
+				} else {
+					consultar.setEnabled(true);
+				}
 
 				salvarRegistro();
 
@@ -481,6 +514,16 @@ public class Exercicio51 {
 						telaCadastro();
 
 						JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!");
+
+						j = 0;
+						i = posicao - 1;
+
+						cadastro[i][j] = " ";
+						cadastro[i][j + 1] = " ";
+						cadastro[i][j + 2] = " ";
+						cadastro[i][j + 3] = " ";
+						cadastro[i][j + 4] = " ";
+
 					}
 					;
 
@@ -493,6 +536,8 @@ public class Exercicio51 {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
+				janela3.dispose();
 
 				janela4 = new JFrame("Consulta de Clientes");
 				janela4.setLayout(null);
@@ -530,16 +575,8 @@ public class Exercicio51 {
 				painel4.add(ok);
 
 				exibirRegistros();
+				acoesDaTelaOk();
 
-			}
-		});
-
-		ok.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				telaCadastro();
 			}
 		});
 
@@ -552,14 +589,43 @@ public class Exercicio51 {
 				campo2.setEnabled(true);
 				campo3.setEnabled(true);
 				campo4.setEnabled(true);
-				campo5.setEnabled(true);
+				telefone.setEnabled(true);
 
 			}
 		});
 	}
 
+	static void acoesDaTelaOk() {
+		ok.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				int t = tabela.getSelectedRow();
+
+				janela4.dispose();
+				telaCadastro();
+
+				campo4.setText((String) tabela.getValueAt(t, 0));
+				campo1.setText((String) tabela.getValueAt(t, 1));
+				campo2.setText((String) tabela.getValueAt(t, 2));
+				campo3.setText((String) tabela.getValueAt(t, 3));
+				telefone.setText((String) tabela.getValueAt(t, 4));
+
+				posicao = Integer.parseInt(((String) tabela.getValueAt(t, 0)));
+
+			}
+		});
+
+	}
+
 	static void exibirRegistros() {
 
+		
+		
+		
+		
+		
 		String[] dados = new String[5];
 
 		for (int i = 0; i < cod; i++) {
@@ -570,7 +636,6 @@ public class Exercicio51 {
 
 			}
 			tabela2.addRow(dados);
-
 		}
 
 	}
@@ -581,7 +646,7 @@ public class Exercicio51 {
 		cadastro[i][j + 1] = campo1.getText();
 		cadastro[i][j + 2] = campo2.getText();
 		cadastro[i][j + 3] = campo3.getText();
-		cadastro[i][j + 4] = campo5.getText();
+		cadastro[i][j + 4] = telefone.getText();
 		i++;
 
 	}
