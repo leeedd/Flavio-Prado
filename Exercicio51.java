@@ -72,6 +72,7 @@ public class Exercicio51 {
 	static JButton consultar;
 	static JButton excluir;
 	static JButton ok;
+	static JButton sair2;
 	static JTable tabela;
 	static Scrollbar rolagem;
 	static JScrollPane rolagem2;
@@ -87,6 +88,8 @@ public class Exercicio51 {
 	static String[][] cadastro = new String[100][5];
 
 	static String[] tabela1 = new String[] { "Código", "Nome", "Endereço", "E-mail", "Telefone" };
+
+	static boolean salvo = false;
 
 	static DefaultTableModel tabela2;
 
@@ -152,6 +155,9 @@ public class Exercicio51 {
 	}
 
 	public static void main(String[] args) {
+
+		iniciarMatriz();
+
 		componentes();
 
 	}
@@ -231,6 +237,15 @@ public class Exercicio51 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				buscarPosicao(0);
+				cod = posicao;
+				if (cod == 0) {
+
+					cod = 1;
+
+				} else {
+					cod++;
+				}
 
 				telaCadastro();
 
@@ -361,6 +376,7 @@ public class Exercicio51 {
 		campo4.setSize(30, 30);
 		campo4.setLocation(670, 25);
 		campo4.setText("" + cod);
+
 		campo4.setVisible(true);
 		painel3.add(campo4);
 		capa3 = new JLabel("Endereço:");
@@ -440,22 +456,32 @@ public class Exercicio51 {
 		excluir.setVisible(true);
 		painel3.add(excluir);
 
+		botoesCadastros();
+
+	}
+
+	static void botoesCadastros() {
+
 		novo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				buscarPosicao(0);
+				cod = posicao;
 				if (cod < 100) {
-					salvarRegistro();
+					cod++;
+
 					campo4.setText("");
 					campo4.setText("" + cod);
-
-					cod++;
+					if (!salvo) {
+						salvarRegistro();
+					}
 
 					salvar.setEnabled(true);
 					editar.setEnabled(false);
 					janela3.dispose();
 					telaCadastro();
-
+					salvo = false;
 				} else {
 
 					campo1.setEnabled(false);
@@ -467,8 +493,6 @@ public class Exercicio51 {
 
 				}
 
-				
-
 			}
 
 		});
@@ -478,6 +502,9 @@ public class Exercicio51 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				buscarPosicao(0);
+				cod = posicao;
+				cod++;
 				salvar.setEnabled(false);
 				editar.setEnabled(true);
 				salvar.setEnabled(true);
@@ -488,7 +515,7 @@ public class Exercicio51 {
 				campo4.setEnabled(false);
 				telefone.setEnabled(false);
 
-				if (cod == 1) {
+				if (cod < 1) {
 					consultar.setEnabled(false);
 
 				} else {
@@ -496,7 +523,7 @@ public class Exercicio51 {
 				}
 
 				salvarRegistro();
-
+				salvo = true;
 				JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
 
 			}
@@ -524,9 +551,10 @@ public class Exercicio51 {
 						cadastro[i][j + 3] = " ";
 						cadastro[i][j + 4] = " ";
 
+						cod--;
+
 					}
 					;
-
 				}
 
 			}
@@ -569,10 +597,22 @@ public class Exercicio51 {
 				rolagem2.setViewportView(tabela);
 				painel4.add(rolagem2);
 
+				buscarPosicao(0);
+
 				ok = new JButton("OK");
 				ok.setBounds(10, 310, 100, 20);
 				ok.setVisible(true);
 				painel4.add(ok);
+
+				if (posicao == 0 && quantidadeCliente() == 0) {
+					ok.setEnabled(false);
+
+				}
+
+				sair2 = new JButton("Sair");
+				sair2.setBounds(140, 310, 100, 20);
+				sair2.setVisible(true);
+				painel4.add(sair2);
 
 				exibirRegistros();
 				acoesDaTelaOk();
@@ -595,7 +635,22 @@ public class Exercicio51 {
 		});
 	}
 
+	static int quantidadeCliente() {
+		int qtde = 0;
+		for (int q = 0; q < 100; q++) {
+			for (int w = 0; w < 5; w++) {
+				String valor = cadastro[q][w];
+				if(!valor.equals(" ") && w == 0){
+					qtde++;
+				}
+				
+			}
+		}
+		return qtde;
+	}
+
 	static void acoesDaTelaOk() {
+
 		ok.addActionListener(new ActionListener() {
 
 			@Override
@@ -603,44 +658,77 @@ public class Exercicio51 {
 
 				int t = tabela.getSelectedRow();
 
+				if (t > -1) {
+
+					janela4.dispose();
+					telaCadastro();
+
+					campo4.setText((String) tabela.getValueAt(t, 0));
+					campo1.setText((String) tabela.getValueAt(t, 1));
+					campo2.setText((String) tabela.getValueAt(t, 2));
+					campo3.setText((String) tabela.getValueAt(t, 3));
+					telefone.setText((String) tabela.getValueAt(t, 4));
+
+					posicao = Integer.parseInt(((String) tabela.getValueAt(t, 0)));
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Por favor, selecione um registro para continuar!");
+				}
+
+			}
+		});
+
+		sair2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				janela4.dispose();
-				telaCadastro();
-
-				campo4.setText((String) tabela.getValueAt(t, 0));
-				campo1.setText((String) tabela.getValueAt(t, 1));
-				campo2.setText((String) tabela.getValueAt(t, 2));
-				campo3.setText((String) tabela.getValueAt(t, 3));
-				telefone.setText((String) tabela.getValueAt(t, 4));
-
-				posicao = Integer.parseInt(((String) tabela.getValueAt(t, 0)));
 
 			}
 		});
 
 	}
 
+	static void buscarPosicao(int n) {
+		String dados = cadastro[n][0];
+		if (!dados.equals(" ")) {
+			buscarPosicao(n + 1);
+		} else {
+			posicao = n;
+		}
+
+	}
+
 	static void exibirRegistros() {
 
-		
-		
-		
+		int k = quantidadeCliente();
 		
 		
 		String[] dados = new String[5];
 
-		for (int i = 0; i < cod; i++) {
+		for (int i = 0; i < k; i++) {
 
 			for (int j = 0; j < 5; j++) {
 
-				dados[j] = cadastro[i][j];
+				if (!cadastro[i][j].equals(" ") && j == 0) {
+
+					dados[0] = cadastro[i][0];
+					dados[1] = cadastro[i][1];
+					dados[2] = cadastro[i][2];
+					dados[3] = cadastro[i][3];
+					dados[4] = cadastro[i][4];
+					tabela2.addRow(dados);
+					
+				}
 
 			}
-			tabela2.addRow(dados);
+
 		}
 
 	}
 
 	static void salvarRegistro() {
+
 		j = 0;
 		cadastro[i][j] = campo4.getText();
 		cadastro[i][j + 1] = campo1.getText();
@@ -648,6 +736,19 @@ public class Exercicio51 {
 		cadastro[i][j + 3] = campo3.getText();
 		cadastro[i][j + 4] = telefone.getText();
 		i++;
+
+	}
+
+	static void iniciarMatriz() {
+
+		for (int f = 0; f < 100; f++) {
+
+			for (int w = 0; w < 5; w++) {
+
+				cadastro[f][w] = " ";
+			}
+
+		}
 
 	}
 }
