@@ -119,13 +119,13 @@ public class Exercicio51 {
 		capa8.setVisible(true);
 		painel.add(capa8);
 
-		campo6 = new JTextField();
+		campo6 = new JTextField("admin");
 		campo6.setSize(80, 20);
 		campo6.setLocation(350, 95);
 		campo6.setVisible(true);
 		painel.add(campo6);
 
-		campo7 = new JPasswordField();
+		campo7 = new JPasswordField("admin");
 		campo7.setSize(80, 20);
 		campo7.setLocation(350, 125);
 		campo7.setVisible(true);
