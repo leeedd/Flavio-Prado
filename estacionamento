@@ -1,0 +1,844 @@
+import java.awt.Color;
+import javax.swing.table.*;
+import javax.swing.text.MaskFormatter;
+import java.awt.Scrollbar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JMenu;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
+public class Estacionamento1 {
+
+	static JPanel painel;
+	static JFrame frame;
+	static JLabel andar1;
+	static JLabel andar2;
+	static JLabel andar3;
+	static JLabel moto;
+	static JLabel carro;
+	static JLabel prioritario;
+	static JPanel moto1;
+	static JPanel moto2;
+	static JPanel moto3;
+	static JPanel moto4;
+	static JPanel moto5;
+	static JPanel moto6;
+	static JPanel moto7;
+	static JPanel moto8;
+	static JPanel moto9;
+	static JPanel prioritario1;
+	static JPanel prioritario2;
+	static JPanel prioritario3;
+	static JPanel prioritario4;
+	static JPanel prioritario5;
+	static JPanel prioritario6;
+	static JPanel carro1;
+	static JPanel carro2;
+	static JPanel carro3;
+	static JPanel carro4;
+	static JPanel carro5;
+	static JPanel carro6;
+	static JPanel carro7;
+	static JPanel carro8;
+	static JPanel carro9;
+	static JPanel carro10;
+	static JPanel carro11;
+	static JPanel carro12;
+	static JPanel carro13;
+	static JPanel carro14;
+	static JPanel carro15;
+	static JButton entrada;
+	static JButton saida;
+
+	static boolean[] vaga = new boolean[30];
+
+	public static void main(String[] args) {
+
+		menuEstacionamento();
+		
+	}
+
+	static void menuEstacionamento() {
+
+		frame = new JFrame();
+		frame.setLayout(null);
+		frame.setResizable(false);
+		frame.setSize(800, 600);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setVisible(true);
+		vagas();
+
+		painel = new JPanel();
+		painel.setLayout(null);
+		painel.setBackground(Color.WHITE);
+		painel.setSize(800, 600);
+		painel.setVisible(true);
+		frame.add(painel);
+
+		andar1 = new JLabel("1° Andar");
+		andar1.setSize(300, 100);
+		andar1.setLocation(40, 30);
+		andar1.setVisible(true);
+		painel.add(andar1);
+
+		andar2 = new JLabel("2° Andar");
+		andar2.setSize(300, 100);
+		andar2.setLocation(350, 30);
+		andar2.setVisible(true);
+		painel.add(andar2);
+
+		andar3 = new JLabel("3° Andar");
+		andar3.setSize(300, 100);
+		andar3.setLocation(650, 30);
+		andar3.setVisible(true);
+		painel.add(andar3);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(70, 60);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(70, 90);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(380, 60);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(380, 90);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(680, 60);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		moto = new JLabel("Moto");
+		moto.setSize(300, 100);
+		moto.setLocation(680, 90);
+		moto.setVisible(true);
+		painel.add(moto);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(70, 120);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(70, 150);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(380, 120);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(380, 150);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(680, 120);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		prioritario = new JLabel("Prioritário");
+		prioritario.setSize(300, 100);
+		prioritario.setLocation(680, 150);
+		prioritario.setVisible(true);
+		painel.add(prioritario);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 180);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 210);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 240);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 270);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 300);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(70, 330);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 180);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 210);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 240);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 270);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 300);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(380, 330);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 180);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 210);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 240);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 270);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 300);
+		carro.setVisible(true);
+		painel.add(carro);
+
+		carro = new JLabel("Carro");
+		carro.setSize(300, 100);
+		carro.setLocation(680, 330);
+		carro.setVisible(true);
+		painel.add(carro);
+
+	}
+
+	static void vagas() {
+
+		moto1 = new JPanel();
+		moto1.setSize(20, 20);
+		moto1.setLocation(40, 100);
+		moto1.setVisible(true);
+		frame.add(moto1);
+
+		moto2 = new JPanel();
+		moto2.setSize(20, 20);
+		moto2.setLocation(40, 130);
+		moto2.setVisible(true);
+		frame.add(moto2);
+
+		moto3 = new JPanel();
+		moto3.setSize(20, 20);
+		moto3.setLocation(40, 160);
+		moto3.setVisible(true);
+		frame.add(moto3);
+
+		moto4 = new JPanel();
+		moto4.setSize(20, 20);
+		moto4.setLocation(350, 100);
+		moto4.setVisible(true);
+		frame.add(moto4);
+
+		moto5 = new JPanel();
+		moto5.setSize(20, 20);
+		moto5.setLocation(350, 130);
+		moto5.setVisible(true);
+		frame.add(moto5);
+
+		moto6 = new JPanel();
+		moto6.setSize(20, 20);
+		moto6.setLocation(350, 160);
+		moto6.setVisible(true);
+		frame.add(moto6);
+
+		moto7 = new JPanel();
+		moto7.setSize(20, 20);
+		moto7.setLocation(650, 100);
+		moto7.setVisible(true);
+		frame.add(moto7);
+
+		moto8 = new JPanel();
+		moto8.setSize(20, 20);
+		moto8.setLocation(650, 130);
+		moto8.setVisible(true);
+		frame.add(moto8);
+
+		moto9 = new JPanel();
+		moto9.setSize(20, 20);
+		moto9.setLocation(650, 160);
+		moto9.setVisible(true);
+		frame.add(moto9);
+
+		prioritario1 = new JPanel();
+		prioritario1.setSize(20, 20);
+		prioritario1.setLocation(40, 190);
+		prioritario1.setVisible(true);
+		frame.add(prioritario1);
+
+		prioritario2 = new JPanel();
+		prioritario2.setSize(20, 20);
+		prioritario2.setLocation(40, 220);
+		prioritario2.setVisible(true);
+		frame.add(prioritario2);
+
+		prioritario3 = new JPanel();
+		prioritario3.setSize(20, 20);
+		prioritario3.setLocation(350, 190);
+		prioritario3.setVisible(true);
+		frame.add(prioritario3);
+
+		prioritario4 = new JPanel();
+		prioritario4.setSize(20, 20);
+		prioritario4.setLocation(350, 220);
+		prioritario4.setVisible(true);
+		frame.add(prioritario4);
+
+		prioritario5 = new JPanel();
+		prioritario5.setSize(20, 20);
+		prioritario5.setLocation(650, 190);
+		prioritario5.setVisible(true);
+		frame.add(prioritario5);
+
+		prioritario6 = new JPanel();
+		prioritario6.setSize(20, 20);
+		prioritario6.setLocation(650, 220);
+		prioritario6.setVisible(true);
+		frame.add(prioritario6);
+
+		carro1 = new JPanel();
+		carro1.setSize(20, 20);
+		carro1.setLocation(40, 250);
+		carro1.setVisible(true);
+		frame.add(carro1);
+
+		carro2 = new JPanel();
+		carro2.setSize(20, 20);
+		carro2.setLocation(40, 280);
+		carro2.setVisible(true);
+		frame.add(carro2);
+
+		carro3 = new JPanel();
+		carro3.setSize(20, 20);
+		carro3.setLocation(40, 310);
+		carro3.setVisible(true);
+		frame.add(carro3);
+
+		carro4 = new JPanel();
+		carro4.setSize(20, 20);
+		carro4.setLocation(40, 340);
+		carro4.setVisible(true);
+		frame.add(carro4);
+
+		carro5 = new JPanel();
+		carro5.setSize(20, 20);
+		carro5.setLocation(40, 370);
+		carro5.setVisible(true);
+		frame.add(carro5);
+
+		carro6 = new JPanel();
+		carro6.setSize(20, 20);
+		carro6.setLocation(350, 250);
+		carro6.setVisible(true);
+		frame.add(carro6);
+
+		carro7 = new JPanel();
+		carro7.setSize(20, 20);
+		carro7.setLocation(350, 280);
+		carro7.setVisible(true);
+		frame.add(carro7);
+
+		carro8 = new JPanel();
+		carro8.setSize(20, 20);
+		carro8.setLocation(350, 310);
+		carro8.setVisible(true);
+		frame.add(carro8);
+
+		carro9 = new JPanel();
+		carro9.setSize(20, 20);
+		carro9.setLocation(350, 340);
+		carro9.setVisible(true);
+		frame.add(carro9);
+
+		carro10 = new JPanel();
+		carro10.setSize(20, 20);
+		carro10.setLocation(350, 370);
+		carro10.setVisible(true);
+		frame.add(carro10);
+
+		carro11 = new JPanel();
+		carro11.setSize(20, 20);
+		carro11.setLocation(650, 250);
+		carro11.setVisible(true);
+		frame.add(carro11);
+
+		carro12 = new JPanel();
+		carro12.setSize(20, 20);
+		carro12.setLocation(650, 280);
+		carro12.setVisible(true);
+		frame.add(carro12);
+
+		carro13 = new JPanel();
+		carro13.setSize(20, 20);
+		carro13.setLocation(650, 310);
+		carro13.setVisible(true);
+		frame.add(carro13);
+
+		carro14 = new JPanel();
+		carro14.setSize(20, 20);
+		carro14.setLocation(650, 340);
+		carro14.setVisible(true);
+		frame.add(carro14);
+
+		carro15 = new JPanel();
+		carro15.setSize(20, 20);
+		carro15.setLocation(650, 370);
+		carro15.setVisible(true);
+		frame.add(carro15);
+
+		entrada = new JButton("Entrada");
+		entrada.setSize(80, 15);
+		entrada.setLocation(280, 400);
+		entrada.setVisible(true);
+		frame.add(entrada);
+
+		saida = new JButton("Saída");
+		saida.setSize(80, 15);
+		saida.setLocation(360, 400);
+		saida.setVisible(true);
+		frame.add(saida);
+
+		cor();
+
+	}
+
+	static void cor() {
+
+		botaoEntradaSaida();
+
+		if (vaga[0] == true) {
+
+			moto1.setBackground(Color.RED);
+
+		} else {
+
+			moto1.setBackground(Color.GREEN);
+
+		}
+		if (vaga[1] == true) {
+
+			moto2.setBackground(Color.RED);
+
+		} else {
+
+			moto2.setBackground(Color.GREEN);
+
+		}
+		if (vaga[2] == true) {
+
+			moto3.setBackground(Color.RED);
+
+		} else {
+
+			moto3.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[3] == true) {
+			moto4.setBackground(Color.RED);
+
+		} else {
+
+			moto4.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[4] == true) {
+
+			moto5.setBackground(Color.RED);
+
+		} else {
+
+			moto5.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[5] == true) {
+
+			moto6.setBackground(Color.RED);
+
+		} else {
+			moto6.setBackground(Color.GREEN);
+		}
+
+		if (vaga[6] == true) {
+
+			moto7.setBackground(Color.RED);
+
+		} else {
+
+			moto7.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[7] == true) {
+
+			moto8.setBackground(Color.RED);
+
+		} else {
+
+			moto8.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[8] == true) {
+
+			moto9.setBackground(Color.RED);
+		} else {
+			moto9.setBackground(Color.GREEN);
+		}
+		if (vaga[9] == true) {
+
+			prioritario1.setBackground(Color.RED);
+
+		} else {
+
+			prioritario1.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[10] == true) {
+
+			prioritario2.setBackground(Color.RED);
+
+		} else {
+
+			prioritario2.setBackground(Color.GREEN);
+
+		}
+		if (vaga[11] == true) {
+
+			prioritario3.setBackground(Color.RED);
+
+		} else {
+
+			prioritario3.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[12] == true) {
+
+			prioritario4.setBackground(Color.RED);
+
+		} else {
+
+			prioritario4.setBackground(Color.GREEN);
+
+		}
+		if (vaga[13] == true) {
+
+			prioritario5.setBackground(Color.RED);
+
+		} else {
+
+			prioritario5.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[14] == true) {
+
+			prioritario6.setBackground(Color.RED);
+
+		} else {
+
+			prioritario6.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[15] == true) {
+
+			carro1.setBackground(Color.RED);
+
+		} else {
+
+			carro1.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[16] == true) {
+
+			carro2.setBackground(Color.RED);
+
+		} else {
+
+			carro2.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[17] == true) {
+
+			carro3.setBackground(Color.RED);
+
+		} else {
+
+			carro3.setBackground(Color.GREEN);
+
+		}
+		if (vaga[18] == true) {
+
+			carro4.setBackground(Color.RED);
+
+		} else {
+
+			carro4.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[19] == true) {
+
+			carro5.setBackground(Color.RED);
+
+		} else {
+
+			carro5.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[20] == true) {
+
+			carro6.setBackground(Color.RED);
+
+		} else {
+
+			carro6.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[21] == true) {
+
+			carro7.setBackground(Color.RED);
+
+		} else {
+
+			carro7.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[22] == true) {
+
+			carro8.setBackground(Color.RED);
+
+		} else {
+
+			carro8.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[23] == true) {
+
+			carro9.setBackground(Color.RED);
+
+		} else {
+
+			carro9.setBackground(Color.GREEN);
+		}
+
+		if (vaga[24] == true) {
+
+			carro10.setBackground(Color.RED);
+
+		} else {
+
+			carro10.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[25] == true) {
+
+			carro11.setBackground(Color.RED);
+
+		} else {
+
+			carro11.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[26] == true) {
+
+			carro12.setBackground(Color.RED);
+
+		} else {
+
+			carro12.setBackground(Color.GREEN);
+
+		}
+		if (vaga[27] == true) {
+
+			carro13.setBackground(Color.RED);
+
+		} else {
+
+			carro13.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[28] == true) {
+
+			carro14.setBackground(Color.RED);
+
+		} else {
+
+			carro14.setBackground(Color.GREEN);
+
+		}
+
+		if (vaga[29] == true) {
+
+			carro15.setBackground(Color.RED);
+
+		} else {
+
+			carro15.setBackground(Color.GREEN);
+
+		}
+
+	}
+
+	static void sorteio() {
+
+		int a = (int) (Math.random() * 30);
+
+		if (vaga[a] == false) {
+			
+			vaga[a] = true;
+
+		} else if (vaga[a] ==true) {
+
+			
+
+		} else {
+
+			JOptionPane.showMessageDialog(null, "Todas as vagas estão ocupadas");
+
+		}
+	}
+	static void sorteio2() {
+
+		int a = (int) (Math.random() * 30);
+
+		if (vaga[a] == false) {
+
+		} else if (vaga[a] == true) {
+
+			vaga[a] = false;
+
+		} else {
+
+			JOptionPane.showMessageDialog(null, "Todas as vagas estão ocupadas");
+
+		}
+	}
+
+	static void botaoEntradaSaida() {
+
+		entrada.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				cor();
+				sorteio();
+
+			}
+		});
+
+		saida.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				cor();
+				sorteio2();
+
+			}
+		});
+
+	}
+
+}
