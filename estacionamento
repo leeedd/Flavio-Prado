@@ -31,6 +31,11 @@ public class Estacionamento1 {
 	static JLabel moto;
 	static JLabel carro;
 	static JLabel prioritario;
+	static JLabel livre;
+	static JLabel ocupado;
+	static JLabel legenda;
+	static JPanel livre1;
+	static JPanel ocupado1;
 	static JPanel moto1;
 	static JPanel moto2;
 	static JPanel moto3;
@@ -69,7 +74,7 @@ public class Estacionamento1 {
 	public static void main(String[] args) {
 
 		menuEstacionamento();
-		
+
 	}
 
 	static void menuEstacionamento() {
@@ -287,6 +292,39 @@ public class Estacionamento1 {
 		carro.setLocation(680, 330);
 		carro.setVisible(true);
 		painel.add(carro);
+		
+		livre = new JLabel("Livre");
+		livre.setSize(300, 100);
+		livre.setLocation(330, 450);
+		livre.setVisible(true);
+		painel.add(livre);
+		
+		ocupado= new JLabel("Ocupado");
+		ocupado.setSize(300, 100);
+		ocupado.setLocation(400, 450);
+		ocupado.setVisible(true);
+		painel.add(ocupado);
+		
+		livre1 = new JPanel();
+		livre1.setBackground(Color.GREEN);
+		livre1.setSize(20, 20);
+		livre1.setLocation(310, 490);
+		livre1.setVisible(true);
+		painel.add(livre1);
+		
+		ocupado1 = new JPanel();
+		ocupado1.setBackground(Color.RED);
+		ocupado1.setSize(20, 20);
+		ocupado1.setLocation(380, 490);
+		ocupado1.setVisible(true);
+		painel.add(ocupado1);
+		
+		legenda= new JLabel("Legenda");
+		legenda.setSize(300, 100);
+		legenda.setLocation(340, 420);
+		legenda.setVisible(true);
+		painel.add(legenda);
+		
 
 	}
 
@@ -484,19 +522,21 @@ public class Estacionamento1 {
 		saida.setVisible(true);
 		frame.add(saida);
 
-		cor();
+		
+			cor();
+			botaoEntradaSaida();
 
 	}
 
 	static void cor() {
 
-		botaoEntradaSaida();
+		//botaoEntradaSaida();
 
 		if (vaga[0] == true) {
 
 			moto1.setBackground(Color.RED);
 
-		} else {
+		} else if(vaga[0]==false) {
 
 			moto1.setBackground(Color.GREEN);
 
@@ -505,274 +545,230 @@ public class Estacionamento1 {
 
 			moto2.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[1]==false) {
 
 			moto2.setBackground(Color.GREEN);
 
-		}
-		if (vaga[2] == true) {
+		}if (vaga[2] == true) {
 
 			moto3.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[2]== false) {
 
 			moto3.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[3] == true) {
+		}if(vaga[3] == true) {
 			moto4.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[3]== false) {
 
 			moto4.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[4] == true) {
+		}if(vaga[4] == true) {
 
 			moto5.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[4]== false) {
 
 			moto5.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[5] == true) {
+		}if(vaga[5] == true) {
 
 			moto6.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[5] == false) {
+		
 			moto6.setBackground(Color.GREEN);
-		}
-
-		if (vaga[6] == true) {
+		
+		}if(vaga[6] == true) {
 
 			moto7.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[6] == false) {
 
 			moto7.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[7] == true) {
+		}if(vaga[7] == true) {
 
 			moto8.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[7] == false) {
 
 			moto8.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[8] == true) {
+		}if(vaga[8] == true) {
 
 			moto9.setBackground(Color.RED);
-		} else {
+		
+		}else if(vaga[8] == false) {
+		
 			moto9.setBackground(Color.GREEN);
-		}
-		if (vaga[9] == true) {
+	
+		}if(vaga[9] == true) {
 
 			prioritario1.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[9] == false) {
 
 			prioritario1.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[10] == true) {
+		}if(vaga[10] == true) {
 
 			prioritario2.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[10] == false) {
 
 			prioritario2.setBackground(Color.GREEN);
 
-		}
-		if (vaga[11] == true) {
+		}if(vaga[11] == true) {
 
 			prioritario3.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[11] == false) {
 
 			prioritario3.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[12] == true) {
+		}if(vaga[12] == true) {
 
 			prioritario4.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[12]== false) {
 
 			prioritario4.setBackground(Color.GREEN);
 
-		}
-		if (vaga[13] == true) {
+		}if(vaga[13] == true) {
 
 			prioritario5.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[13] == false){
 
 			prioritario5.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[14] == true) {
+		}if(vaga[14] == true) {
 
 			prioritario6.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[14] == false) {
 
 			prioritario6.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[15] == true) {
+		}if(vaga[15] == true) {
 
 			carro1.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[15] == false){
 
 			carro1.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[16] == true) {
+		}if(vaga[16] == true) {
 
 			carro2.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[16] == false){
 
 			carro2.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[17] == true) {
+		}if(vaga[17] == true) {
 
 			carro3.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[17] == false){
 
 			carro3.setBackground(Color.GREEN);
 
-		}
-		if (vaga[18] == true) {
+		}if(vaga[18] == true) {
 
 			carro4.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[18] == false) {
 
 			carro4.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[19] == true) {
+		}if(vaga[19] == true) {
 
 			carro5.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[19] == false){
 
 			carro5.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[20] == true) {
+		}if(vaga[20] == true) {
 
 			carro6.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[20] == false){
 
 			carro6.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[21] == true) {
+		}if(vaga[21] == true) {
 
 			carro7.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[21] == false){
 
 			carro7.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[22] == true) {
+		}if(vaga[22] == true) {
 
 			carro8.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[22] == false){
 
 			carro8.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[23] == true) {
+		}if(vaga[23] == true) {
 
 			carro9.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[23] == false){
 
 			carro9.setBackground(Color.GREEN);
-		}
-
-		if (vaga[24] == true) {
+		
+		}if(vaga[24] == true) {
 
 			carro10.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[24]== false){
 
 			carro10.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[25] == true) {
+		}if(vaga[25] == true) {
 
 			carro11.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[25] == false){
 
 			carro11.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[26] == true) {
+		}if(vaga[26] == true) {
 
 			carro12.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[26] == false){
 
 			carro12.setBackground(Color.GREEN);
 
-		}
-		if (vaga[27] == true) {
+		}if(vaga[27] == true) {
 
 			carro13.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[27] == false){
 
 			carro13.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[28] == true) {
+		}if(vaga[28] == true) {
 
 			carro14.setBackground(Color.RED);
 
-		} else {
+		}else if(vaga[28] == false){
 
 			carro14.setBackground(Color.GREEN);
 
-		}
-
-		if (vaga[29] == true) {
+		}if(vaga[29] == true) {
 
 			carro15.setBackground(Color.RED);
 
-		} else {
+		}else{
 
 			carro15.setBackground(Color.GREEN);
 
@@ -785,34 +781,27 @@ public class Estacionamento1 {
 		int a = (int) (Math.random() * 30);
 
 		if (vaga[a] == false) {
-			
+
 			vaga[a] = true;
 
-		} else if (vaga[a] ==true) {
+					
+		} else if (vaga[a] == true) {
 
-			
-
-		} else {
-
-			JOptionPane.showMessageDialog(null, "Todas as vagas estão ocupadas");
-
-		}
+		} 
+		
 	}
+
 	static void sorteio2() {
 
 		int a = (int) (Math.random() * 30);
 
-		if (vaga[a] == false) {
-
-		} else if (vaga[a] == true) {
-
-			vaga[a] = false;
-
-		} else {
-
-			JOptionPane.showMessageDialog(null, "Todas as vagas estão ocupadas");
-
+		if (vaga[a] == true) {
+			vaga[a]= false;
+		} else if (vaga[a] == false) {
+			
+			
 		}
+		
 	}
 
 	static void botaoEntradaSaida() {
@@ -822,8 +811,9 @@ public class Estacionamento1 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				cor();
 				sorteio();
+				cor();
+				
 
 			}
 		});
@@ -832,9 +822,9 @@ public class Estacionamento1 {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				cor();
 				sorteio2();
+				cor();
+				
 
 			}
 		});
